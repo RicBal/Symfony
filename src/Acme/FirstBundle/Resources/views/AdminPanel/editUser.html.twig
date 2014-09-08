@@ -1,0 +1,15 @@
+{% extends 'AcmeFirstBundle::layout.html.twig' %}
+
+{% block title %}Edit user - Page{% endblock %}
+
+{% block leftSidebar %}
+    <div id="sidebarMenu">
+        <a href="{{ path('admin_add_user') }}">Add new user</a><br/>
+        <a href="{{ path('admin_list_users') }}">Users list</a>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <h2>Update user information</h2>
+    {{ form(form) }}
+{% endblock %}

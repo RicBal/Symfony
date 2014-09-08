@@ -1,0 +1,32 @@
+{% extends 'AcmeFirstBundle::layout.html.twig' %}
+{% block title %}Add Product - Page{% endblock %}
+{% block body %}
+    <h2 style="margin-bottom: 30px;">Add new product</h2>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>About</th>
+            <th>Color</th>
+            <th>Price of 1m^2</th>
+        </tr>
+        <tr>
+            <td>{{ form_row(form.name, {'label': false, 'attr': {'placeholder': 'Name'}}) }}</td>
+            <td>{{ form_row(form.about, {'label': false, 'attr': {'placeholder': 'Product info...'}}) }}</td>
+            <td>{{ form_row(form.color, {'label': false, 'attr': {'placeholder': 'Color'}}) }}</td>
+            <td>{{ form_row(form.price, {'label': false, 'attr': {'placeholder': 'Price'}}) }}</td>
+        </tr>
+    </table>
+    <br/>
+    {{ form_row(form.submit, {'label': 'Insert'}) }}
+    {{ form_end(form)}}
+{% endblock %}
+{% block leftSidebar %}
+    <ul>
+        <li><a href="{{ path('acme_product_select') }}">Select Product</a></li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('acme_product_list') }}">View All Products</a></li>
+        {% endif %}
+    </ul>
+{% endblock %}

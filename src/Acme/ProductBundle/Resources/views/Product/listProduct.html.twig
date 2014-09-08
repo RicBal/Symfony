@@ -1,0 +1,38 @@
+{% extends 'AcmeFirstBundle::layout.html.twig' %}
+{% block title %}List Products - Page{% endblock %}
+{% block body %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        {{ flashMessage }}
+    {% endfor %}
+    <div id="product">
+        <h2>List of all products</h2>
+        <table border="1">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>About</th>
+                <th>Color</th>
+                <th>Price</th>
+                <th>Created at</th>
+            </tr>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.about }}</td>
+                    <td>{{ product.color }}</td>
+                    <td>{{ product.price }} Lt</td>
+                    <td>{{ product.created|date("Y-M-d", "Europe/Vilnius") }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+{% block leftSidebar %}
+    <ul>
+        <li><a href="{{ path('acme_product_select') }}">Select Product</a></li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('acme_product_add') }}">Add New Product</a></li>
+        {% endif %}
+    </ul>
+{% endblock %}

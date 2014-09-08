@@ -1,0 +1,17 @@
+{% extends "AcmeFirstBundle::layout.html.twig" %}
+
+{% block title %}Edit - Page{% endblock %}
+
+{% block leftSidebar %}
+    <div id="sidebarMenu">
+        <a href="{{ path('user_profile') }}">My profile</a><br/>
+        <a href="{{ path('fos_user_change_password') }}">Change password</a>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <h2>Edit your profile</h2>
+    {% block fos_user_content %}
+        {% include "FOSUserBundle:Profile:edit_content.html.twig" %}
+    {% endblock fos_user_content %}
+{% endblock %}

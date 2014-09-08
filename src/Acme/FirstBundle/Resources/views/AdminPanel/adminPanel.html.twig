@@ -1,0 +1,35 @@
+{% extends 'AcmeFirstBundle::layout.html.twig' %}
+
+{% block title %}Admin panel - Page{% endblock %}
+
+    {% block leftSidebar %}
+        {% if is_granted('ROLE_ADMIN') %}
+                <div id="sidebarMenu">
+                    <a href="{{ path('admin_add_user') }}">Add new user</a><br/>
+                    <a href="{{ path('admin_list_users') }}">Users list</a>
+                </div>
+        {% endif %}
+    {% endblock %}
+
+    {% block body %}
+        {% for flashMessage in app.session.flashbag.get('successMsg') %}
+            <div class="success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        <h2>Admin panel</h2>
+        {% if is_granted('ROLE_ADMIN') %}
+            <p id="adminPanelContent">
+                This page is accessible just for administrator.
+                Admin panel is responsible for users management.
+                <ul>
+                    <li>By choosing "Add new user" you can add new user to the system.</li>
+                    <li>By choosing "Users list" you can update already existing
+                        users information or delete unwanted user.
+                    </li>
+                </ul>
+            </p>
+        {% else %}
+            You must be logged in as administrator!
+        {% endif %}
+    {% endblock %}

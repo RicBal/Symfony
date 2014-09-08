@@ -1,0 +1,19 @@
+acme_product_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: AcmeProductBundle:Default:index }
+
+acme_product_list:
+    path:     /list
+    defaults: { _controller: AcmeProductBundle:Product:getProductList }
+
+acme_product_add:
+    path:     /add
+    defaults: { _controller: AcmeProductBundle:Product:setProduct }
+
+acme_product_select:
+    path:     /select
+    defaults: { _controller: AcmeProductBundle:Product:chooseProduct }
+
+acme_product_direct:
+    path: /
+    defaults: { _controller: AcmeProductBundle:Product:direct }

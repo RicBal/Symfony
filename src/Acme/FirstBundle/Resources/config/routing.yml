@@ -1,0 +1,66 @@
+#src/Acme/FirstBundle/Resources/Config/routing.yml
+first_default:
+    pattern: /
+    defaults: { _controller: AcmeFirstBundle:First:home }
+
+first_homepage:
+    pattern:  /home
+    defaults: { _controller: AcmeFirstBundle:First:home }
+
+first_homepage_comfirmed:
+    pattern:  /register/confirmed
+    defaults: { _controller: AcmeFirstBundle:First:home }
+
+first_about:
+    pattern: /about
+    defaults: { _controller: AcmeFirstBundle:First:about }
+
+first_contactUs:
+    pattern: /contact
+    defaults: { _controller: AcmeFirstBundle:Contact:contact }
+
+first_comment:
+    pattern: /comment
+    defaults: { _controller: AcmeFirstBundle:Comment:comment }
+
+sudoku:
+    pattern: /sudoku
+    defaults: { _controller: AcmeFirstBundle:Game:sudoku }
+
+#laikina
+register:
+    pattern: /registerrrrr
+    defaults: { _controller: AcmeFirstBundle:First:register }
+
+#laikina
+login:
+    pattern: /loginnnnnn
+    defaults: { _controller: AcmeFirstBundle:First:login }
+
+admin_panel:
+    pattern: /admin_panel
+    defaults: { _controller: AcmeFirstBundle:First:adminPanel }
+
+user_profile:
+    pattern: /user_profile
+    defaults: { _controller: AcmeFirstBundle:First:userProfile }
+
+admin_add_user:
+    pattern: /admin_panel/add
+    defaults: { _controller: AcmeFirstBundle:AdminPanel:add }
+
+admin_edit_user:
+    pattern: /admin_panel/edit/{id}
+    defaults: { _controller: AcmeFirstBundle:AdminPanel:edit }
+
+admin_delete_user:
+    pattern: /admin_panel/delete/{id}
+    defaults: { _controller: AcmeFirstBundle:AdminPanel:delete }
+
+admin_list_users:
+    pattern: /admin_panel/list
+    defaults: { _controller: AcmeFirstBundle:AdminPanel:list }
+
+admin_change_user_password:
+    pattern: /admin_panel/change_password/{id}
+    defaults: { _controller: AcmeFirstBundle:AdminPanel:changeUserPassword }

@@ -1,0 +1,53 @@
+{% extends 'AcmeFirstBundle::layout.html.twig' %}
+
+{% block title %}Users list - Page{% endblock %}
+
+    {% block leftSidebar %}
+        {% if is_granted('ROLE_ADMIN') %}
+                <div id="sidebarMenu">
+                    <a href="{{ path('admin_add_user') }}">Add new user</a><br/>
+                    <a href="{{ path('admin_list_users') }}">Update/Delete users</a>
+                </div>
+        {% endif %}
+    {% endblock %}
+
+    {% block body %}
+        {% for flashMessage in app.session.flashbag.get('successMsg') %}
+            <div class="success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        <h2>Users list</h2>
+        {% if is_granted('ROLE_ADMIN') %}
+            {% if users is not empty %}
+                <div id="listContent">
+                    <table border="1">
+                        <tr>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Change password</th>
+                            <th>Delete</th>
+                            <th>Last login</th>
+                        </tr>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.id }}</td>
+                                <td>
+                                    <a href="{{ path("admin_edit_user", {'id': user.id }) }}"><span id="usernameColor">{{ user.username }}</span></a><br/>
+                                </td>
+                                <td><a href="{{ path("admin_change_user_password", {'id': user.id }) }}">Change</a></td>
+                                <td>
+                                    <a href="{{ path("admin_delete_user", {'id': user.id }) }}" onclick="return confirm('Are you sure?')"><span id="deleteColor">Delete</span></a><br/>
+                                </td>
+                                <td>{{ user.lastLogin|date("Y-M-d H:i", "Europe/Vilnius") }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            {% else %}
+                <p id="red">There are no users in the database!</p>
+            {% endif %}
+        {% else %}
+            You must be logged in as administrator!
+        {% endif %}
+    {% endblock %}

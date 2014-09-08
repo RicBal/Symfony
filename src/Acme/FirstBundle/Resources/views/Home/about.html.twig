@@ -1,0 +1,49 @@
+{% extends 'AcmeFirstBundle::layout.html.twig' %}
+
+{% block title %}About-Page{% endblock %}
+
+{% block body %}
+    <div id="aboutPage">
+        <h2>About this site</h2>
+        <ul>
+        <li>Users are divided into two roles: "ROLE_USER" and "ROLE_ADMIN".</li>
+        <li>Some pages are accessible just for logged in members.</li>
+        <li>Contact Us page is visible allways, but accessible just for logged in members.</li>
+        <li>Only logged in as admin members can see "Admin panel" in the menu
+            and only users with "ROLE_ADMIN" can access that page.</li>
+        <li>Administrator login: admin/admin</li>
+        <li>User login: login/login</li>
+    </ul>
+
+
+    <h3>Administrator: </h3>
+    <p>
+        Admin is responsible for all users management and he is able to create new user,
+        update existing user or delete user.
+    </p>
+    <h3>User:</h3>
+    <p>
+        All registered members receive USER role. Simple user only can modify his own profile information.
+    </p>
+    <h3>Comment Area:</h3>
+    <p>
+        Comment area is accessible just for logged in members.
+    </p>
+    <h3>Contact Us</h3>
+    <p>
+        Contact Us form is accessible just for logged in members as well.<br/>
+        The user can specify any name or email he want, but by default these fields are filled with
+        logged in member information.<br/>
+        All fields in thi form are required and mail is sent to web owner email address.
+    </p>
+    <h3>Product System</h3>
+    <p>
+        Product system is a simple system which handle some basic information about product.
+        Products can be created by admin. Admin also can view all existing products in table format.
+        Users or guests can select one product, specify that product parameters and get all generated info about that
+        product. Info consists of sections "name", "about", "color", "Size m&sup2;", "m&sup2; price", "total price", and some date information.
+    </p>
+    <h3>Scripts</h3>
+    <p>Also here is some "third party" java script applications.</p>
+    </div>
+{% endblock %}

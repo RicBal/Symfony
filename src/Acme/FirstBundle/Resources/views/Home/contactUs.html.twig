@@ -1,0 +1,30 @@
+{% extends 'AcmeFirstBundle::layout.html.twig' %}
+
+{% block title %}Contact Us-Page{% endblock %}
+
+{% block body %}
+    <h2>Contact Us page - Symfony 2</h2>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+            {% for flashMessage in app.session.flashbag.get('successMsg') %}
+            <div class="success">
+                {{ flashMessage }}
+            </div>
+        {% endfor %}
+        <form method="post" class="ContactForm">
+            {{ form_errors(form) }}
+
+            {{ form_row(form.name, { 'label': 'Name*', 'value': app.user.username }) }}
+            {{ form_row(form.email, { 'label': 'Email*', 'value': app.user.email }) }}
+            {{ form_row(form.subject, { 'label': 'Subject*' }) }}
+            {{ form_row(form.body, { 'label': 'Body*' }) }}
+
+            {{ form_rest(form) }}
+
+            <input type="submit" value="Send">
+        </form>
+        <span id="note">Note: All fields marked with * is required!</span>
+    {% else %}
+        <p id="warning">Please log in!</p>
+        <p>You can login by pressing here: <span id="link"><a href="{{ path('fos_user_security_login') }}">Log in</a></span></p>
+    {% endif %}
+{% endblock %}

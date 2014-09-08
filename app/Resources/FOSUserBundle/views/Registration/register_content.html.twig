@@ -1,0 +1,12 @@
+{% extends 'AcmeFirstBundle::layout.html.twig' %}
+{% block title %}Register-Page{% endblock %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block body %}
+    <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+        {{ form_widget(form) }}
+        <div>
+            <input type="submit" value="{{ 'registration.submit'|trans }}" />
+        </div>
+    </form>
+    <span id="note">Note: All fields marked with * is required!</span>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'AcmeFirstBundle::layout.html.twig' %}
+{% block title %}Selected - Page{% endblock %}
+{% block body %}
+    <div id="product">
+        <h2>Detailed information of the selected product</h2>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>About</th>
+                <td>{{ product.about }}</td>
+            </tr>
+            <tr>
+                <th>Color</th>
+                <td>{{ product.color }}</td>
+            </tr>
+            <tr>
+                <th>Size m&sup2;</th>
+                <td>{{ size }}</td>
+            </tr>
+            <tr>
+                <th>m&sup2; price</th>
+                <td>{{ product.price }} Lt ({{ (product.price/3.45)|number_format(2) }} &euro;)</td>
+            </tr>
+            <tr>
+                <th>Total price</th>
+                <td>{{ size*product.price }} Lt ({{ (size*product.price/3.45)|number_format(2) }} &euro;)</td>
+            </tr>
+            <tr>
+                <th>Product created at</th>
+                <td>{{ product.created|date }}</td>
+            </tr>
+            <tr>
+                <th>Product selected at</th>
+                <td>{{ "now"|date("Y-M-d H:i", "Europe/Vilnius") }}</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
+{% block leftSidebar %}
+    <ul>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="{{ path('acme_product_list') }}">View All Products</a></li>
+            <li><a href="{{ path('acme_product_add') }}">Add New Product</a></li>
+        {% endif %}
+        <li><a href="{{ path('acme_product_select') }}">Select Product</a></li>
+    </ul>
+{% endblock %}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" type="text/css" href="{{ asset('css/screen.css') }}"/>
+        {% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('img.png') }}" />
+    </head>
+    <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/lt_LT/sdk.js#xfbml=1&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <div id="liveScore">
+        <iframe width="1000px" height="73px" frameborder="0" src="http://www.fiba.com/ls/index_header.html#6241" scrolling="no" border="0"></iframe>
+    </div>
+    <div id="allContent">
+            <div id="logo">
+                {% block logo %}
+                    <a href="{{ path('first_default') }}"><img src="{{ asset('css/img1.png') }}" alt="BRycka-Logo" /></a>
+                {% endblock %}
+            </div>
+            <div id="menu">
+                <div id="loginInfo">
+                    <div>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            Logged in as: {{ 'layout.logged_in_as'|trans({'': app.user.username}, 'FOSUserBundle') }} <a href="{{ path('user_profile') }}">{{ app.user.username }}</a> |
+                            <a href="{{ path('fos_user_security_logout') }}">
+                                {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                            </a>
+                        {% else %}
+                            Please <a href="{{ path('fos_user_security_login') }}">Log in</a> or <a href="{{ path('fos_user_registration_register') }}">Register</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% block menu %}
+                    <ul>
+                        <li><a href="{{ path('first_homepage') }}">Home</a></li>
+                        <li><a href="{{ path('acme_product_direct') }}" {% if app.request.get('_route') == 'acme_product_direct' %} class="active"{% endif %}>Product System</a></li>
+                        <li><a href="{{ path('first_about') }}" {% if app.request.get('_route') == 'first_about' %} class="active"{% endif %}>About</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="{{ path('admin_panel') }}" {% if app.request.get('_route') == 'admin_panel' %} class="active"{% endif %}>Admin panel</a></li>
+                        {% endif %}
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                            <li><a href="{{ path('first_comment') }}" {% if app.request.get('_route') == 'first_comment' %} class="active"{% endif %}>Comment area</a></li>
+                        {% endif %}
+                        <li><a href="{{ path('first_contactUs') }}" {% if app.request.get('_route') == 'first_contactUs' %} class="active"{% endif %}>Contact Us</a></li>
+                    </ul>
+                {% endblock %}
+            </div>
+            <div id="leftSidebar">
+                {% block leftSidebar %}Left sidebar{% endblock %}
+            </div>
+            <div id="mainContent">
+                {% block body %}{% endblock %}
+                {% block javascripts %}{% endblock %}
+            </div>
+            <div id="rightSidebar">
+                {% block rightSidebar %}Right sidebar{% endblock %}
+            </div>
+        </div>
+    <div style="clear:both;"></div>
+    <div id="metaMain">
+        <div id="meta">
+            {% block meta %}
+            {% endblock %}
+        </div>
+        <div id="footer">
+            {% block footer %}
+                &copy; 2014. BRycka - Symfony 2 project. Site checked via:
+                <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                    <img style="border:0;width:45px;height:20px"
+                         src="http://jigsaw.w3.org/css-validator/images/vcss"
+                         alt="Valid CSS!" />
+                </a>
+            {% endblock %}
+        </div>
+    </div>
+    </body>
+</html>

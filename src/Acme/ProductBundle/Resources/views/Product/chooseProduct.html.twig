@@ -1,0 +1,24 @@
+{% extends 'AcmeFirstBundle::layout.html.twig' %}
+{% block title %}Choose Product - Page{% endblock %}
+{% block body %}
+    <div id="product">
+        <h2>Select product</h2>
+
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.name, {'attr': {'placeholder': 'Name'}}) }}
+        {{ form_row(form.width, {'attr': {'placeholder': 'Width'}}) }}
+        {{ form_row(form.height, {'label': 'Length', 'attr': {'placeholder': 'Length'}}) }}
+        {{ form_row(form.submit, {'label': 'Confirm'}) }}
+        {{ form_end(form)}}
+
+    </div>
+{% endblock %}
+{% block leftSidebar %}
+    {% if is_granted('ROLE_ADMIN') %}
+        <ul>
+            <li><a href="{{ path('acme_product_list') }}">View All Products</a></li>
+            <li><a href="{{ path('acme_product_add') }}">Add New Product</a></li>
+        </ul>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'AcmeFirstBundle::layout.html.twig' %}
+
+{% block title %}Comment area - Page{% endblock %}
+
+{% block body %}
+    <div id="fos_comment_thread" data-thread="{{ thread.id }}">
+        <h2>Leave your comment!</h2>
+        {% set count = thread.numComments %}
+        <h3>{% transchoice count with {'%count%': count} from "FOSCommentBundle" %}fos_comment_thread_comment_count{% endtranschoice %}</h3>
+        {% include 'FOSCommentBundle:Thread:comments.html.twig' %}
+    </div>
+{% endblock %}
